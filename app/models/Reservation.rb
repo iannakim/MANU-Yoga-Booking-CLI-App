@@ -4,7 +4,9 @@ class Reservation < ActiveRecord::Base
     belongs_to :yogaclass
 
 
-    # def all
-    # self.find_by(student_id: ###)
-    # end
+    def find_by(student)
+    
+    # if return == 0, display option: "Book a New Yoga Class"
+    #add menu choice - Back to Main Menu
+    end
 end
