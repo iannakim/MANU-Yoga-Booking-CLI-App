@@ -1,5 +1,4 @@
 require 'tty-prompt'
-require 'pry'
 
 class Student < ActiveRecord::Base
 

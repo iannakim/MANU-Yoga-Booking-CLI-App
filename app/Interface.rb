@@ -6,10 +6,12 @@ class Interface
   attr_reader :prompt
   attr_accessor :student, :insturctor, :yogaclass, :reservation
 
+
   def initialize
-      @prompt = TTY::Prompt.new
-      # @prompt = TTY::Prompt.new(symbols: {marker: "→"})
+    @prompt = TTY::Prompt.new
+    # @prompt = TTY::Prompt.new(symbols: {marker: "→"})
   end
+
 
   def welcome
     system "clear"
@@ -53,7 +55,12 @@ class Interface
   def main_menu
     student.reload
     system "clear"
-      puts "Welcome, #{student.name}!"
+      puts "
+      \n
+      \n
+      Welcome, #{student.name}!
+      \n
+      \n"
       prompt.select("What would you like to do?") do |menu|
         menu.choice "View My Upcoming Yoga Classes", -> {display_all_reservation}
         menu.choice "Book a New Yoga Class", -> {book_new_class}
@@ -87,12 +94,16 @@ class Interface
       end
   end
 
+
+
   def confirm_booking(yoga_class)
     prompt.select ("Are you sure you want to book this class?") do |menu|
     menu.choice "Yes!", -> {book_a_reservation(yoga_class)}
     menu.choice "Nope, back to Menu", -> {self.main_menu}
     end
   end
+
+
 
   def book_a_reservation(yoga_class)
     system "clear"
@@ -105,6 +116,8 @@ class Interface
       menu.choice "Log out", -> {byebye}
     end
   end
+
+
 
   def all_location
     system "clear"
@@ -119,11 +132,21 @@ class Interface
 
 
   def about_page
-    puts "did you know that mānu means 'to float' in maori language?"
+    puts "
+    \n
+    \n
+    did you know that mānu means 'to float' in maori language?
+    \n
+    \n"
     sleep 2
-    puts"mānu is a virtual class booking app that allows you to search for\nand book yoga classes at a click of a button.\nwe are currently accepting new students and limitng the sizes of\nour classes to meet the safety requirements due to covid-19.\nplease feel free to reach out if you have any questions! "
-    sleep 
+    puts "mānu is a virtual class booking app that allows\nusers to search for and book yoga classes at a click of a button.\nwe're currently accepting new students and limitng the sizes of\nour classes to meet the safety requirements due to covid-19.\nplease feel free to reach out if you have any questions!"
+    sleep 3
+    prompt.select("") do |menu|
+      menu.choice "Back", -> {byebye}
+    end
+
   end
+
 
 
   def byebye
