@@ -65,10 +65,10 @@ lic_vinyasa_yoga1 = YogaClass.create(instructor_id: Instructor.all.sample.id, na
 
 ########################################################### Reservation ############################################################
 
-booking1 = Reservation.create(student_id: Student.all.sample.id, yogaclass_id: YogaClass.all.sample.id) #coco - uws/bikram
-booking2 = Reservation.create(student_id: Student.all.sample.id, yogaclass_id: YogaClass.all.sample.id) #coco - lic/hot
-booking3 = Reservation.create(student_id: Student.all.sample.id, yogaclass_id: YogaClass.all.sample.id) #eva - uws/bikram
-booking4 = Reservation.create(student_id: Student.all.sample.id, yogaclass_id: YogaClass.all.sample.id) #eva - chelsea/vinyasa
+booking1 = Reservation.create(student_id: Student.all.sample.id, yoga_class_id: YogaClass.all.sample.id) #coco - uws/bikram
+booking2 = Reservation.create(student_id: Student.all.sample.id, yoga_class_id: YogaClass.all.sample.id) #coco - lic/hot
+booking3 = Reservation.create(student_id: Student.all.sample.id, yoga_class_id: YogaClass.all.sample.id) #eva - uws/bikram
+booking4 = Reservation.create(student_id: Student.all.sample.id, yoga_class_id: YogaClass.all.sample.id) #eva - chelsea/vinyasa
 
 
 

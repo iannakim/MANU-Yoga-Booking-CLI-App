@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2020_08_19_130217) do
 
   create_table "reservations", force: :cascade do |t|
     t.integer "student_id"
-    t.integer "yogaclass_id"
+    t.integer "yoga_class_id"
   end
 
   create_table "students", force: :cascade do |t|

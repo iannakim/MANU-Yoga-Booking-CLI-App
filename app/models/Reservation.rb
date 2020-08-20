@@ -1,7 +1,7 @@
 class Reservation < ActiveRecord::Base
 
     belongs_to :student
-    belongs_to :yogaclass
+    belongs_to :yoga_class
 
 
     
