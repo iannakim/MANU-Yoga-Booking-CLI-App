@@ -21,32 +21,32 @@ class Interface
     \n
     "
     prompt.select ("") do |menu|
-      menu.choice "Log in", -> {log_in_helper}
-      menu.choice "Sign up", -> {create_user_helper}
-      menu.choice "About mānu", -> {about_page_helper}
+      menu.choice "Log in", -> {log_in}
+      menu.choice "Sign up", -> {create_user}
+      menu.choice "About mānu", -> {about_page}
     end
   end
   
-  def about_page_helper
-    puts "mānu means 'to float' in maori language.\nmānu is a virtual class booking app\nthat allows yogis to search for and book\nyoga classes at a click of a button."
-    sleep 
+
+  def log_in
+    system "clear"
+    userReturnValue = Student.log_in()
+      until userReturnValue
+        userReturnValue = Student.log_in()
+      end
+    self.student = userReturnValue
+    self.main_menu
   end
 
-  def log_in_helper
-    #
-    #
-    #
-  end
 
-
-  def create_user_helper
+  def create_user
     personReturnValue =	Student.register()
       until personReturnValue
         personReturnValue = Student.register()
     end
       self.student = personReturnValue
-    self.main_menu
-    end
+      self.main_menu
+  end
     
 
 
@@ -88,7 +88,7 @@ class Interface
   end
 
   def confirm_booking(yoga_class)
-  prompt.select ("Are you sure you want to book this class?") do |menu|
+    prompt.select ("Are you sure you want to book this class?") do |menu|
     menu.choice "Yes!", -> {book_a_reservation(yoga_class)}
     menu.choice "Nope, back to Menu", -> {self.main_menu}
     end
@@ -96,36 +96,37 @@ class Interface
 
   def book_a_reservation(yoga_class)
     system "clear"
-    puts "Your Reservation is Complete!\nWe can't wait to get down with you, Yogi!"
+    puts "\n\n\nYour Reservation is Complete!\n\nWe can't wait to get down with you, Yogi!\n\n\n"
     returnReservationValue = Reservation.create(student_id: self.student.id , yogaclass_id: yoga_class.id)
-    puts "
-    \n
-    \n
-    Reservation Information:
-    \n
-    \n"
-    returnReservationValue.each do |yoga_reservation|
-      find_instructor = Instructor.all.find{|instructor| instructor.id == yoga_studio.instructor_id}
-      menu.choice yoga_studio.name + " -- " + yoga_studio.time + " -- " + find_instructor.name, -> {confirm_booking(yoga_studio)}
+    prompt.select ("What Would You Like to do Next?") do |menu|
+      menu.choice "Back to Main Menu", -> {self.main_menu}
+      menu.choice "View My Upcoming Yoga Classes", -> {}
+      menu.choice "Log out", -> {byebye}
     end
   end
 
   def all_location
-      system "clear"
-      all_the_yoga = YogaClass.all.map(&:location).uniq
-        prompt.select("Choose a Location:", all_the_yoga)
+    system "clear"
+    all_the_yoga = YogaClass.all.map(&:location).uniq
+    prompt.select("Choose a Location:", all_the_yoga)
         # # binding.pry
         # # puts YogaClass.all.map(&:location).uniq
         # #add menu choice - Back to Main Menu
         
-      end
+  end
 
 
 
-      def byebye
-        system "clear"
-        Interface.new.welcome
-      end
+  def about_page
+    puts "mānu means 'to float' in maori language.\nmānu is a virtual class booking app\nthat allows yogis to search for and book\nyoga classes at a click of a button."
+    sleep 
+  end
+
+
+  def byebye
+    system "clear"
+    Interface.new.welcome
+  end
 
 
 
