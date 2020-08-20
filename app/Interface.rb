@@ -68,11 +68,63 @@ class Interface
         menu.choice "Log out", -> {byebye}
       end
   end
-      
+    
+  # anna.reservations
+
+  def all_my_reservations
+
+    student.reservations.map {|res| puts "[#{res.yogaclass.time}] -- #{res.yogaclass.name} [#{res.yogaclass.location}] - Instructor Name: #{res.yogaclass.instructor.name}"}
+    # .each do |res|
+    #   my_yogaclass = YogaClass.all.find{|yoga_class| yoga_class.id == res.yogaclass_id}
+    #   my_instructor = Instructor.all.find{|instructor| instructor.id == my_yogaclass.instructor_id}
+    #   puts "[#{my_yogaclass.time}] -- #{my_yogaclass.name} [#{my_yogaclass.location}] - Instructor Name: #{my_instructor.name}"
+    #   end
+  end
+
+
   def display_all_reservation
-      #  all the students reservations
-      #  if students reservation is false, put "You don't have any upcoming classes."
-        Reservation.find_by(student)
+    student.reload
+    system "clear"
+      puts "
+      \n
+      \n
+      #{student.name}'s all upcoming classes:
+      \n
+      \n"
+      # all_my_reservations = Reservation.all.select {|res| res.student_id == student.id}
+      
+      if all_my_reservations.length == 0
+        puts "You don't have any upcoming classes."
+      else
+        all_my_reservations
+        # all_my_reservations.each do |res|
+        # my_yogaclass = YogaClass.all.find{|yoga_class| yoga_class.id == res.yogaclass_id}
+        # my_instructor = Instructor.all.find{|instructor| instructor.id == my_yogaclass.instructor_id}
+        # puts "[#{my_yogaclass.time}] -- #{my_yogaclass.name} [#{my_yogaclass.location}] - Instructor Name: #{my_instructor.name}"
+        # end
+      end
+      prompt.select("What would you like to do?") do |menu|
+        menu.choice "Book a New Class", -> {book_new_class}
+        menu.choice "Change reservation", -> {change_helper}
+        menu.choice "Delete reservation", -> {delete_helper}
+        menu.choice "Back to menu", -> {main_menu}
+      end
+  end
+
+
+
+  def change_helper
+    system "clear"
+    choices = @prompt.select("Select the class you would like to change:", all_my_reservations) 
+    # update_the_old(choices)
+  end
+
+  def update_the_old(choice)
+    system "clear"
+    puts "replace function goes here"
+  end
+
+  def delete_helper
   end
 
 
@@ -81,6 +133,9 @@ class Interface
     yoga_locations = YogaClass.all.map(&:location).uniq
     choices = @prompt.select("Please Select a Location:", yoga_locations) 
     location_selected(choices)
+    prompt.select("") do |menu|
+      menu.choice "Back to Menu", -> {main_menu}
+    end
   end
 
 
@@ -109,10 +164,10 @@ class Interface
     system "clear"
     puts "\n\n\nYour Reservation is Complete!\n\nWe can't wait to get down with you, Yogi!\n\n\n"
     returnReservationValue = Reservation.create(student_id: self.student.id , yogaclass_id: yoga_class.id)
-    sleep 3
+    sleep 2
     prompt.select ("What Would You Like to do Next?") do |menu|
       menu.choice "Back to Main Menu", -> {self.main_menu}
-      menu.choice "View My Upcoming Yoga Classes", -> {}
+      menu.choice "View My Upcoming Yoga Classes", -> {display_all_reservation}
       menu.choice "Log out", -> {byebye}
     end
   end

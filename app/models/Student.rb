@@ -12,17 +12,19 @@ class Student < ActiveRecord::Base
       studentInfo = TTY::Prompt.new.ask("Enter Username: ")
       user_found = Student.all.find_by(name: studentInfo)
         if !user_found
-          # puts "\nSorry, that username doesn't exit."
+          puts "\nSorry, that username doesn't exist."
           # # binding.pry
           # prompt.select ("Sorry, that username doesn't exist.") do |menu|
           # menu.choice "Try Again", -> {log_in} 
           # menu.choice "Go Back", -> {main_menu}
           # end 
-          self.register
+          sleep 2
+          studentInfo = self.register
+          user_found = Student.all.find_by(name: studentInfo)
         else
-          puts "\nLog In Successful!\n"
-          print "\nTaking you to Main Menu"
-          sleep(2)
+          puts "\nLog In Successful\n"
+          print "\nTaking you to Main Menu > > >"
+          sleep 1
         end
         user_found
     end
@@ -36,6 +38,7 @@ class Student < ActiveRecord::Base
     else
       Student.create(name: studentInfo, level: levelInfo)
     end
+    studentInfo
   end
 
 
