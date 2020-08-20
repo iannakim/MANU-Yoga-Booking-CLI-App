@@ -1,4 +1,5 @@
 require 'tty-prompt'
+require 'pry'
 
 class Interface
 
@@ -56,7 +57,7 @@ class Interface
       prompt.select("What would you like to do?") do |menu|
         menu.choice "View My Upcoming Yoga Classes", -> {display_all_reservation}
         menu.choice "Book a New Yoga Class", -> {book_new_class}
-        menu.choice "View all locations", -> {all_location}
+        menu.choice "View Our Locations", -> {all_location}
         menu.choice "Log out", -> {byebye}
       end
   end
@@ -65,40 +66,54 @@ class Interface
       #  all the students reservations
       #  if students reservation is false, put "You don't have any upcoming classes."
         Reservation.find_by(student)
+  end
+
+
+  def book_new_class
+    system "clear"
+    yoga_locations = YogaClass.all.map(&:location).uniq
+    choices = @prompt.select("Please Select a Location:", yoga_locations) 
+    location_selected(choices)
+  end
+
+
+  def location_selected(selected_location)
+    all_the_yoga = YogaClass.all.select {|yoga| yoga.location == selected_location}
+        prompt.select("Please Select a Class:") do |menu|
+          all_the_yoga.each do |yoga_studio|
+            find_instructor = Instructor.all.find{|instructor| instructor.id == yoga_studio.instructor_id}
+            menu.choice yoga_studio.name + " -- " + yoga_studio.time + " -- " + find_instructor.name, -> {confirm_booking(yoga_studio)}
+          end
       end
+  end
 
+  def confirm_booking(yoga_class)
+  prompt.select ("Are you sure you want to book this class?") do |menu|
+    menu.choice "Yes!", -> {book_a_reservation(yoga_class)}
+    menu.choice "Nope, back to Menu", -> {self.main_menu}
+    end
+  end
 
-      def book_new_class
-        system "clear"
-        prompt.select ("Choose a Location:" ) do |menu|
-          menu.choice "Chelsea", -> {chelsea_location_selected}
-          menu.choice "Upper West Side", -> {uws_location_selected}
-          menu.choice "Williamsburg", -> {bk_location_selected}
-          menu.choice "Long Island City", -> {lic_location_selected}
-          menu.choice "Back to Main Menu", -> {self.main_menu}
-        end
-      end
+  def book_a_reservation(yoga_class)
+    system "clear"
+    puts "Your Reservation is Complete!\nWe can't wait to get down with you, Yogi!"
+    returnReservationValue = Reservation.create(student_id: self.student.id , yogaclass_id: yoga_class.id)
+    puts "
+    \n
+    \n
+    Reservation Information:
+    \n
+    \n"
+    returnReservationValue.each do |yoga_reservation|
+      find_instructor = Instructor.all.find{|instructor| instructor.id == yoga_studio.instructor_id}
+      menu.choice yoga_studio.name + " -- " + yoga_studio.time + " -- " + find_instructor.name, -> {confirm_booking(yoga_studio)}
+    end
+  end
 
-
-      def location_selected(#location)
-        all_the_yoga = YogaClass.all.select {|yoga| yoga.location == #location}
-      
-      end
-
-      def chelsea_location_selected
-        system "clear"
-        all_the_yoga = YogaClass.all.select {|yoga| yoga.location == "Chelsea, NY"}
-        pp all_the_yoga
-        # binding.pry
-        #view all the times available for chelsea location#
-      end
-
-
-
-      def all_location
-        system "clear"
-         all_the_yoga = YogaClass.all.map(&:location).uniq
-        prompt.select("Choose a Location", all_the_yoga)
+  def all_location
+      system "clear"
+      all_the_yoga = YogaClass.all.map(&:location).uniq
+        prompt.select("Choose a Location:", all_the_yoga)
         # # binding.pry
         # # puts YogaClass.all.map(&:location).uniq
         # #add menu choice - Back to Main Menu
