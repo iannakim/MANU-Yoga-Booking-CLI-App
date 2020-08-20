@@ -1,4 +1,5 @@
 require 'tty-prompt'
+require 'pry'
 
 class Student < ActiveRecord::Base
 
@@ -8,25 +9,24 @@ class Student < ActiveRecord::Base
 
 
   def self.log_in
-    3.times {
-      studentInfo = TTY::Prompt.new.ask("Type in your Username:")
-      found = Student.all.find_by(name: studentInfo)
-      if !found
-        puts "Sorry, that username doesn't exit. Try again."
-        # Student.find_by(name: studentInfo)
-      else
-        puts "Log in success!"
-        break
-      end
-    }
-    if !found
-      puts "Hmm... We couldn't find you.\nTry again later or sign up!"
-      sleep 5
-      Interface.byebye
+      system "clear"
+      studentInfo = TTY::Prompt.new.ask("Enter Username: ")
+      user_found = Student.all.find_by(name: studentInfo)
+        if !user_found
+          # puts "\nSorry, that username doesn't exit."
+          # # binding.pry
+          # prompt.select ("Sorry, that username doesn't exist.") do |menu|
+          # menu.choice "Try Again", -> {log_in} 
+          # menu.choice "Go Back", -> {main_menu}
+          # end 
+          self.register
+        else
+          puts "\nLog In Successful!\n"
+          print "\nTaking you to Main Menu"
+          sleep(2)
+        end
+        user_found
     end
-  end
-  
-
 
   def self.register
     studentInfo = TTY::Prompt.new.ask("Create a new username:")
@@ -38,7 +38,7 @@ class Student < ActiveRecord::Base
       Student.create(name: studentInfo, level: levelInfo)
     end
   end
-    
+
 
 
 end

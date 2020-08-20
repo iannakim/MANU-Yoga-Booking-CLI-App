@@ -98,6 +98,7 @@ class Interface
     system "clear"
     puts "\n\n\nYour Reservation is Complete!\n\nWe can't wait to get down with you, Yogi!\n\n\n"
     returnReservationValue = Reservation.create(student_id: self.student.id , yogaclass_id: yoga_class.id)
+    sleep 3
     prompt.select ("What Would You Like to do Next?") do |menu|
       menu.choice "Back to Main Menu", -> {self.main_menu}
       menu.choice "View My Upcoming Yoga Classes", -> {}
@@ -118,7 +119,9 @@ class Interface
 
 
   def about_page
-    puts "mānu means 'to float' in maori language.\nmānu is a virtual class booking app\nthat allows yogis to search for and book\nyoga classes at a click of a button."
+    puts "did you know that mānu means 'to float' in maori language?"
+    sleep 2
+    puts"mānu is a virtual class booking app that allows you to search for\nand book yoga classes at a click of a button.\nwe are currently accepting new students and limitng the sizes of\nour classes to meet the safety requirements due to covid-19.\nplease feel free to reach out if you have any questions! "
     sleep 
   end
 
