@@ -165,8 +165,27 @@ class Interface
   end
 
 
-  
+
   def delete_res
+    system "clear"
+    choices = @prompt.select("Select the class you would like to CANCEL:", all_my_reservations)
+    res_id = (choices.split("-")[0]).to_i
+    system "clear"
+    prompt.select ("Are you sure you want to CANCEL this class?") do |menu|
+      menu.choice "Yes!", -> {delete_confirmed(res_id)}
+      menu.choice "Nope, back to Menu", -> {self.main_menu}
+    end
+  end
+
+
+  def delete_confirmed(res_id)
+    system "clear"
+    found_res = Reservation.find_by(id: res_id)
+    found_res.destroy
+    system "clear"
+    puts "Succesfully Cancelled!"
+    sleep 2
+    main_menu
   end
 
 
