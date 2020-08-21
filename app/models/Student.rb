@@ -7,27 +7,28 @@ class Student < ActiveRecord::Base
   has_many :instructors, through: :reservations
 
 
-  def self.log_in
-      system "clear"
-      studentInfo = TTY::Prompt.new.ask("Enter Username: ")
-      user_found = Student.all.find_by(name: studentInfo)
-        if !user_found
-          puts "\nSorry, that username doesn't exist."
-          # # binding.pry
-          # prompt.select ("Sorry, that username doesn't exist.") do |menu|
-          # menu.choice "Try Again", -> {log_in} 
-          # menu.choice "Go Back", -> {main_menu}
-          # end 
-          sleep 2
-          studentInfo = self.register
-          user_found = Student.all.find_by(name: studentInfo)
-        else
-          puts "\nLog In Successful\n"
-          print "\nTaking you to Main Menu > > >"
-          sleep 1
-        end
-        user_found
-    end
+  # def self.log_in
+  #     system "clear"
+  #     studentInfo = TTY::Prompt.new.ask("Enter Username: ")
+  #     user_found = Student.all.find_by(name: studentInfo)
+  #       if !user_found
+  #         puts "\nSorry, that username doesn't exist."
+  #         # # binding.pry
+  #         # prompt.select ("Sorry, that username doesn't exist.") do |menu|
+  #         # menu.choice "Try Again", -> {log_in} 
+  #         # menu.choice "Go Back", -> {main_menu}
+  #         # end 
+  #         sleep 2
+  #         studentInfo = self.register
+  #         user_found = Student.all.find_by(name: studentInfo)
+  #         if Student.all.exclude?(studentInfo)
+  #       else
+  #         puts "\nLog In Successful\n"
+  #         print "\nTaking you to Main Menu > > >"
+  #         sleep 1
+  #       end
+  #       user_found
+  #   end
 
   def self.register
     studentInfo = TTY::Prompt.new.ask("Create a new username:")
@@ -38,7 +39,6 @@ class Student < ActiveRecord::Base
     else
       Student.create(name: studentInfo, level: levelInfo)
     end
-    studentInfo
   end
 
 

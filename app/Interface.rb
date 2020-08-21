@@ -4,7 +4,7 @@ require 'pry'
 class Interface
 
   attr_reader :prompt
-  attr_accessor :student, :insturctor, :yoga_class, :reservation
+  attr_accessor :student, :instructor, :yoga_class, :reservation
 
 
   def initialize
@@ -32,13 +32,25 @@ class Interface
 
   def log_in
     system "clear"
-    userReturnValue = Student.log_in()
-      until userReturnValue
-        userReturnValue = Student.log_in()
+    studentInfo = TTY::Prompt.new.ask("Enter Username: ")
+    user_found = Student.all.find_by(name: studentInfo)
+      if Student.all.exclude?(user_found)
+        log_in_error
+      else
+        puts "\nLog in successful!\n"
+        sleep 0.5
       end
-    self.student = userReturnValue
-    self.main_menu
+        self.student = user_found
+        self.main_menu
   end
+
+
+    def log_in_error
+       prompt.select ("Sorry, that username doesn't exist.") do |menu|
+        menu.choice "Try Again", -> {log_in} 
+        menu.choice "Go Back", -> {byebye}
+        end 
+    end
 
 
   def create_user
@@ -58,20 +70,20 @@ class Interface
       puts "
       \n
       \n
-      Welcome, #{student.name}!
+      hello, #{student.name}!
       \n
       \n"
       prompt.select("What would you like to do?") do |menu|
         menu.choice "View My Upcoming Yoga Classes", -> {display_all_reservation}
         menu.choice "Book a New Yoga Class", -> {book_new_class}
-        menu.choice "View Our Locations", -> {all_location}
+        menu.choice "View All Locations", -> {all_location}
         menu.choice "Log out", -> {byebye}
       end
   end
     
 
   def all_my_reservations
-    student.reservations.map {|res| puts "[#{res.yoga_class.time}] -- #{res.yoga_class.name} [#{res.yoga_class.location}] - Instructor Name: #{res.yoga_class.instructor.name}"}
+    student.reservations.map {|res| "#{res.id}-[#{res.yoga_class.time}] - [#{res.yoga_class.location}] Session: #{res.yoga_class.name} - Instructor: #{res.yoga_class.instructor.name}"}
   end
 
 
@@ -87,36 +99,73 @@ class Interface
       if all_my_reservations.length == 0
         puts "You don't have any upcoming classes."
       else
-        all_my_reservations
+        puts all_my_reservations
       end
       prompt.select("What would you like to do?") do |menu|
-        menu.choice "Book a New Class", -> {book_new_class}
+        menu.choice "Book a new class", -> {book_new_class}
         menu.choice "Change reservation", -> {change_res}
         menu.choice "Delete reservation", -> {delete_res}
-        menu.choice "Back to menu", -> {main_menu}
+        menu.choice "Back to main menu", -> {main_menu}
       end
   end
 
 
 
   def change_res
-    choices = @prompt.select("Select the class you would like to change:", all_my_reservations) 
-    update_the_old(choices)
+    system "clear"
+    choices = @prompt.select("Select the class you would like to change:", all_my_reservations)
+    update_the_old(choices.split("-")[0])
     prompt.select("") do |menu|
-      menu.choice "Back to Menu", -> {main_menu}
+      menu.choice "Cancel", -> {main_menu}
     end
   end
 
 
 
-  def update_the_old(selected_choice)
+  def update_the_old(res_id_str)
     system "clear"
-    puts selected_choice.id
-
+    res_id = res_id_str.to_i
+    yoga_locations = YogaClass.all.map(&:location).uniq
+    choices = @prompt.select("Please Select the location of Your *New* Class:", yoga_locations) 
+    new_location_selected(choices, res_id)
+    prompt.select("") do |menu|
+      menu.choice "Cancel, go back to menu", -> {main_menu}
+    end
   end
 
 
 
+  def new_location_selected(the_new_location, res_id)
+    all_the_yoga = YogaClass.all.select {|yoga| yoga.location == the_new_location}
+      prompt.select("Choose Your *New* Class:") do |menu|
+        all_the_yoga.each do |yoga_class|
+          menu.choice yoga_class.name + " -- " + yoga_class.time + " -- " + yoga_class.instructor.name, -> {confirm_new_booking(yoga_class, res_id)}
+        end
+        menu.choice "Back to menu", -> {main_menu}
+      end
+  end
+
+
+
+  def confirm_new_booking(new_class, res_id)
+    system "clear"
+    puts new_class.time + " -- " + new_class.location + " -- " + new_class.name + " -- " + new_class.instructor.name
+    prompt.select ("Are you sure you want to make this change?") do |menu|
+      menu.choice "Yes, I confirm! Change my reservation", -> {overwrite_my_res(new_class, res_id)}
+      menu.choice "No, back to main menu.", -> {self.main_menu}
+      end
+  end
+
+
+
+  def overwrite_my_res(new_yoga_class, res_id)
+    orig_res = Reservation.all.find_by({:id => res_id})
+    updated_res = orig_res.update({:yoga_class_id => new_yoga_class.id})
+    updated_res
+  end
+
+
+  
   def delete_res
   end
 
@@ -134,7 +183,7 @@ class Interface
 
   def location_selected(selected_location)
     all_the_yoga = YogaClass.all.select {|yoga| yoga.location == selected_location}
-        prompt.select("Please Select a Class:") do |menu|
+        prompt.select("Choose Your Class:") do |menu|
           all_the_yoga.each do |yoga_studio|
             find_instructor = Instructor.all.find{|instructor| instructor.id == yoga_studio.instructor_id}
             menu.choice yoga_studio.name + " -- " + yoga_studio.time + " -- " + find_instructor.name, -> {confirm_booking(yoga_studio)}
@@ -204,10 +253,9 @@ class Interface
 
   def byebye
     system "clear"
-    Interface.new.welcome
+    # Interface.new.welcome
+    exit!
   end
-
-
 
 
 end #end for class
