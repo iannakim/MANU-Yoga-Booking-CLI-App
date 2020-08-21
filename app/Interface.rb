@@ -23,9 +23,9 @@ class Interface
     \n
     "
     prompt.select ("") do |menu|
-      menu.choice "Log in", -> {log_in}
-      menu.choice "Sign up", -> {create_user}
-      menu.choice "About mānu", -> {about_page}
+      menu.choice "🌵 Log in", -> {log_in}
+      menu.choice "🌵 Sign up", -> {create_user}
+      menu.choice "🌵 About mānu", -> {about_page}
     end
   end
   
@@ -48,7 +48,7 @@ class Interface
     def log_in_error
        prompt.select ("Sorry, that username doesn't exist.") do |menu|
         menu.choice "Try Again", -> {log_in} 
-        menu.choice "Go Back", -> {byebye}
+        menu.choice "Go Back", -> {bye}
         end 
     end
 
@@ -255,15 +255,14 @@ class Interface
   def about_page
     puts "
     \n
-    \n
-    did you know that mānu means 'to float' in maori language?
+    \n🧘🏾 did you know that mānu means 'to float' in the maori language? 🧘🏾‍♂️
     \n
     \n"
     sleep 2
-    puts "mānu is a virtual class booking app that allows\nusers to search for and book yoga classes at a click of a button.\nwe're currently accepting new students and limitng the sizes of\nour classes to meet the safety requirements due to covid-19.\nplease feel free to reach out if you have any questions!"
+    puts "mānu is a virtual class booking app that allows users to\nsearch for and book our yoga classes at a click of a button.\nWe're currently accepting new students at all our locations and\nlimitng our class sizes to no more than 10 per class in order to\nprovide safe social distancing for all our students and instructors.\nAll students are required to wear a mask inside our studios at this\ntime and if you have any questions, feel free to reach out to us any\ntime. Thank you and we look forward to seeing you soon!\n\n-mānu team" 
     sleep 3
     prompt.select("") do |menu|
-      menu.choice "Back", -> {byebye}
+      menu.choice "Back", -> {bye}
     end
 
   end
@@ -272,10 +271,13 @@ class Interface
 
   def byebye
     system "clear"
-    # Interface.new.welcome
     exit!
   end
 
+  def bye 
+  system "clear"
+    Interface.new.welcome
+  end
 
 end #end for class
 
