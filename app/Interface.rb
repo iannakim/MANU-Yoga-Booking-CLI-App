@@ -18,7 +18,9 @@ class Interface
     puts "
     \n
     \n
-    Welcome to mānu
+    ,(   ,(   ,(   ,(   ,(   ,(
+      `-'  `-'  `-'  `-'  `-'  `-'
+           Welcome to mānu
     \n
     \n
     "
