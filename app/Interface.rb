@@ -35,7 +35,7 @@ class Interface
       menu.choice "🌵 About mānu", -> {about_page}
     end
   end
-  
+  #font ansi shadow
 
   def log_in
     system "clear"
@@ -382,7 +382,7 @@ class Interface
     \n
     \n"
     sleep 2
-    puts "mānu is a Command Line CRUD app that allows users to users to\nsearch for and book yoga classes around new york city.\nThis app has full CRUD functionalities, however, can use many tweaks here\n and there to become more user-friendly and efficient.\nPlease feel free to play around and let me know if you have\nany questions. Thanks for stopping by!\n\n-mānu creator, anna\n(github: iannakim)" 
+    puts "mānu is a Command Line CRUD app that allows users to\nsearch for and book yoga classes around new york city.\nThis app has full CRUD functionalities, however, can use many tweaks here\n and there to become more user-friendly and efficient.\nPlease feel free to play around and let me know if you have\nany questions. Thanks for stopping by!\n\n-mānu creator, anna\n(github: iannakim)" 
     sleep 3
     prompt.select("") do |menu|
       menu.choice "Back", -> {bye}
