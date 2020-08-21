@@ -18,9 +18,14 @@ class Interface
     puts "
     \n
     \n
-    ,(   ,(   ,(   ,(   ,(   ,(
-      `-'  `-'  `-'  `-'  `-'  `-'
-           Welcome to mānu
+  ███╗   ███╗ █████╗    ███╗   ██╗██╗   ██╗
+  ████╗ ████║██╔══██╗██╗████╗  ██║██║   ██║
+  ██╔████╔██║███████║╚═╝██╔██╗ ██║██║   ██║
+  ██║╚██╔╝██║██╔══██║██╗██║╚██╗██║██║   ██║
+  ██║ ╚═╝ ██║██║  ██║╚═╝██║ ╚████║╚██████╔╝
+  ╚═╝     ╚═╝╚═╝  ╚═╝   ╚═╝  ╚═══╝ ╚═════╝
+        ,(   ,(   ,(   ,(   ,(   ,(
+      -'  `-'  `-'  `-'  `-'  `-'  `-'
     \n
     \n
     "
@@ -377,7 +382,7 @@ class Interface
     \n
     \n"
     sleep 2
-    puts "mānu is a virtual class booking app that allows users to\nsearch for and book our yoga classes at a click of a button.\nWe're currently accepting new students at all our locations and\nlimitng our class sizes to no more than 10 per class in order to\nprovide safe social distancing for all our students and instructors.\nAll students are required to wear a mask inside our studios at this\ntime and if you have any questions, feel free to reach out to us any\ntime. Thank you and we look forward to seeing you soon!\n\n-mānu team" 
+    puts "mānu is a Command Line CRUD app that allows users to users to\nsearch for and book yoga classes around new york city.\nThis app has full CRUD functionalities, however, can use many tweaks here\n and there to become more user-friendly and efficient.\nPlease feel free to play around and let me know if you have\nany questions. Thanks for stopping by!\n\n-mānu creator, anna\n(github: iannakim)" 
     sleep 3
     prompt.select("") do |menu|
       menu.choice "Back", -> {bye}
