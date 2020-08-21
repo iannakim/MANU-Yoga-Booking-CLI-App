@@ -32,7 +32,15 @@ class Interface
 
   def log_in
     system "clear"
-    studentInfo = TTY::Prompt.new.ask("Enter Username: ")
+    puts "
+    \n
+    \n
+    ╦  ╔═╗╔═╗  ╦╔╗╔
+    ║  ║ ║║ ╦  ║║║║
+    ╩═╝╚═╝╚═╝  ╩╝╚╝                                                  
+    \n
+    \n"
+    studentInfo = TTY::Prompt.new.ask("Enter Your Username (case-sensitive): ")
     user_found = Student.all.find_by(name: studentInfo)
       if Student.all.exclude?(user_found)
         log_in_error
@@ -70,6 +78,10 @@ class Interface
       puts "
       \n
       \n
+      ╔╦╗╔═╗╦╔╗╔  ╔╦╗╔═╗╔╗╔╦ ╦
+      ║║║╠═╣║║║║  ║║║║╣ ║║║║ ║
+      ╩ ╩╩ ╩╩╝╚╝  ╩ ╩╚═╝╝╚╝╚═╝ 
+      \n                                                       
       hello, #{student.name}!
       \n
       \n"
@@ -93,7 +105,10 @@ class Interface
       puts "
       \n
       \n
-      #{student.name}'s all upcoming classes:
+    #{student.name}'s
+    ╦ ╦╔═╗╔═╗╔═╗╔╦╗╦╔╗╔╔═╗  ╔═╗╦  ╔═╗╔═╗╔═╗╔═╗╔═╗
+    ║ ║╠═╝║  ║ ║║║║║║║║║ ╦  ║  ║  ╠═╣╚═╗╚═╗║╣ ╚═╗
+    ╚═╝╩  ╚═╝╚═╝╩ ╩╩╝╚╝╚═╝  ╚═╝╩═╝╩ ╩╚═╝╚═╝╚═╝╚═╝
       \n
       \n"
       if all_my_reservations.length == 0
@@ -113,6 +128,15 @@ class Interface
 
   def change_res
     system "clear"
+    puts "
+    \n
+    \n
+    [Logged in user: '#{student.name}'']
+    ╔═╗╦ ╦╔═╗╔╗╔╔═╗╔═╗  ╦═╗╔═╗╔═╗╔═╗╦═╗╦  ╦╔═╗╔╦╗╦╔═╗╔╗╔
+    ║  ╠═╣╠═╣║║║║ ╦║╣   ╠╦╝║╣ ╚═╗║╣ ╠╦╝╚╗╔╝╠═╣ ║ ║║ ║║║║
+    ╚═╝╩ ╩╩ ╩╝╚╝╚═╝╚═╝  ╩╚═╚═╝╚═╝╚═╝╩╚═ ╚╝ ╩ ╩ ╩ ╩╚═╝╝╚╝
+    \n
+    \n"
     choices = @prompt.select("Select the class you would like to change:", all_my_reservations)
     update_the_old(choices.split("-")[0])
     prompt.select("") do |menu|
@@ -124,24 +148,43 @@ class Interface
 
   def update_the_old(res_id_str)
     system "clear"
+    puts "
+    \n
+    \n
+    [Logged in user: '#{student.name}'']
+    ╔═╗╦ ╦╔═╗╔╗╔╔═╗╔═╗  ╦═╗╔═╗╔═╗╔═╗╦═╗╦  ╦╔═╗╔╦╗╦╔═╗╔╗╔
+    ║  ╠═╣╠═╣║║║║ ╦║╣   ╠╦╝║╣ ╚═╗║╣ ╠╦╝╚╗╔╝╠═╣ ║ ║║ ║║║║
+    ╚═╝╩ ╩╩ ╩╝╚╝╚═╝╚═╝  ╩╚═╚═╝╚═╝╚═╝╩╚═ ╚╝ ╩ ╩ ╩ ╩╚═╝╝╚╝
+    \n
+    \n"
     res_id = res_id_str.to_i
     yoga_locations = YogaClass.all.map(&:location).uniq
-    choices = @prompt.select("Please Select the location of Your * New * Class:", yoga_locations) 
+    choices = @prompt.select("Please Select the location of Your * NEW * Class:", yoga_locations) 
     new_location_selected(choices, res_id)
     prompt.select("") do |menu|
-      menu.choice "Cancel, go back to menu", -> {main_menu}
+      menu.choice "Back to main menu", -> {main_menu}
     end
   end
 
 
 
   def new_location_selected(the_new_location, res_id)
+    system "clear"
+    puts "
+    \n
+    \n
+    [Logged in user: '#{student.name}'']
+    ╔═╗╦ ╦╔═╗╔╗╔╔═╗╔═╗  ╦═╗╔═╗╔═╗╔═╗╦═╗╦  ╦╔═╗╔╦╗╦╔═╗╔╗╔
+    ║  ╠═╣╠═╣║║║║ ╦║╣   ╠╦╝║╣ ╚═╗║╣ ╠╦╝╚╗╔╝╠═╣ ║ ║║ ║║║║
+    ╚═╝╩ ╩╩ ╩╝╚╝╚═╝╚═╝  ╩╚═╚═╝╚═╝╚═╝╩╚═ ╚╝ ╩ ╩ ╩ ╩╚═╝╝╚╝
+    \n
+    \n"
     all_the_yoga = YogaClass.all.select {|yoga| yoga.location == the_new_location}
-      prompt.select("Choose Your * New * Class:") do |menu|
+      prompt.select("Choose Your * NEW * Class:") do |menu|
         all_the_yoga.each do |yoga_class|
           menu.choice yoga_class.name + " -- " + yoga_class.time + " -- " + yoga_class.instructor.name, -> {confirm_new_booking(yoga_class, res_id)}
         end
-        menu.choice "Back to menu", -> {main_menu}
+        menu.choice "Back to main menu", -> {main_menu}
       end
   end
 
@@ -149,6 +192,14 @@ class Interface
 
   def confirm_new_booking(new_class, res_id)
     system "clear"
+    puts "
+    \n
+    \n
+    ╔═╗╔═╗╔╗╔╔═╗╦╦═╗╔╦╗  ╔═╗╦  ╔═╗
+    ║  ║ ║║║║╠╣ ║╠╦╝║║║  ╠═╝║  ╚═╗
+    ╚═╝╚═╝╝╚╝╚  ╩╩╚═╩ ╩  ╩  ╩═╝╚═╝
+    \n
+    \n"
     puts new_class.time + " -- " + new_class.location + " -- " + new_class.name + " -- " + new_class.instructor.name
     prompt.select ("Are you sure you want to make this change?") do |menu|
       menu.choice "Yes, I confirm! Change my reservation", -> {overwrite_my_res(new_class, res_id)}
@@ -159,6 +210,16 @@ class Interface
 
 
   def overwrite_my_res(new_yoga_class, res_id)
+    system "clear"
+    puts"
+    \n
+    \n
+    ╦ ╦╔═╗╦ ╦┬┬
+    ╚╦╝╠═╣╚╦╝││
+     ╩ ╩ ╩ ╩ oo
+    \n
+    \n"
+    puts "You've Sueccessfuly Changed your Reservation.\nWe'll see you soon!"
     orig_res = Reservation.all.find_by({:id => res_id})
     updated_res = orig_res.update({:yoga_class_id => new_yoga_class.id})
     updated_res
@@ -168,9 +229,25 @@ class Interface
 
   def delete_res
     system "clear"
+    puts "
+    \n
+    \n
+    ╔═╗╔═╗╔╗╔╔═╗╔═╗╦    ╦═╗╔═╗╔═╗╔═╗╦═╗╦  ╦╔═╗╔╦╗╦╔═╗╔╗╔
+    ║  ╠═╣║║║║  ║╣ ║    ╠╦╝║╣ ╚═╗║╣ ╠╦╝╚╗╔╝╠═╣ ║ ║║ ║║║║
+    ╚═╝╩ ╩╝╚╝╚═╝╚═╝╩═╝  ╩╚═╚═╝╚═╝╚═╝╩╚═ ╚╝ ╩ ╩ ╩ ╩╚═╝╝╚╝
+    \n
+    \n"
     choices = @prompt.select("Select the class you would like to CANCEL:", all_my_reservations)
     res_id = (choices.split("-")[0]).to_i
     system "clear"
+    puts "
+    \n
+    \n
+    ╔╦╗╦ ╦╦╔╗╔╦╔═  ╔╦╗╦ ╦╦╔═╗╔═╗┬
+     ║ ╠═╣║║║║╠╩╗   ║ ║║║║║  ║╣ │
+     ╩ ╩ ╩╩╝╚╝╩ ╩   ╩ ╚╩╝╩╚═╝╚═╝o
+    \n
+    \n"
     prompt.select ("Are you sure you want to * CANCEL * this class?") do |menu|
       menu.choice "Yes!", -> {delete_confirmed(res_id)}
       menu.choice "Nope, back to Menu", -> {self.main_menu}
@@ -179,11 +256,18 @@ class Interface
 
 
   def delete_confirmed(res_id)
-    system "clear"
     found_res = Reservation.find_by(id: res_id)
     found_res.destroy
     system "clear"
-    puts "Succesfully Cancelled!"
+    puts "
+    \n
+    \n
+    ╔═╗╔═╗╔╦╗  ╔╦╗╔═╗  ╔═╗╔═╗╔═╗  ╦ ╦╔═╗╦ ╦  ╔═╗╔═╗
+    ╚═╗╠═╣ ║║   ║ ║ ║  ╚═╗║╣ ║╣   ╚╦╝║ ║║ ║  ║ ╦║ ║
+    ╚═╝╩ ╩═╩╝   ╩ ╚═╝  ╚═╝╚═╝╚═╝   ╩ ╚═╝╚═╝  ╚═╝╚═╝
+    \n
+    \n"
+    puts "Your Reservation was Succesfully Cancelled.\nWe hope to see you soon!"
     sleep 2
     main_menu
   end
@@ -191,6 +275,14 @@ class Interface
 
   def book_new_class
     system "clear"
+    puts "
+      \n
+      \n
+      ╦  ╔═╗╔╦╗╔═╗  ╔╦╗╔═╗  ╔╦╗╦ ╦╦╔═╗┬
+      ║  ║╣  ║ ╚═╗   ║║║ ║   ║ ╠═╣║╚═╗│
+      ╩═╝╚═╝ ╩ ╚═╝  ═╩╝╚═╝   ╩ ╩ ╩╩╚═╝o
+      \n
+      \n"
     yoga_locations = YogaClass.all.map(&:location).uniq
     choices = @prompt.select("Please Select a Location:", yoga_locations) 
     location_selected(choices)
@@ -201,6 +293,14 @@ class Interface
 
 
   def location_selected(selected_location)
+    puts "
+    \n
+    \n
+    ╔═╗╔═╗╦  ╔═╗╔═╗╔╦╗  ╔═╗  ╔═╗╦  ╔═╗╔═╗╔═╗
+    ╚═╗║╣ ║  ║╣ ║   ║   ╠═╣  ║  ║  ╠═╣╚═╗╚═╗
+    ╚═╝╚═╝╩═╝╚═╝╚═╝ ╩   ╩ ╩  ╚═╝╩═╝╩ ╩╚═╝╚═╝
+    \n
+    \n"
     all_the_yoga = YogaClass.all.select {|yoga| yoga.location == selected_location}
         prompt.select("Choose Your Class:") do |menu|
           all_the_yoga.each do |yoga_studio|
@@ -213,6 +313,14 @@ class Interface
 
 
   def confirm_booking(yoga_class)
+    puts "
+    \n
+    \n
+    ╔═╗╔═╗╔╗╔╔═╗╦╦═╗╔╦╗  ╔═╗╦  ╔═╗
+    ║  ║ ║║║║╠╣ ║╠╦╝║║║  ╠═╝║  ╚═╗
+    ╚═╝╚═╝╝╚╝╚  ╩╩╚═╩ ╩  ╩  ╩═╝╚═╝
+    \n
+    \n"
     prompt.select ("Are you sure you want to book this class?") do |menu|
     menu.choice "Yes!", -> {book_a_reservation(yoga_class)}
     menu.choice "Nope, back to Menu", -> {self.main_menu}
@@ -226,7 +334,15 @@ class Interface
     if Reservation.find_by(student_id: self.student.id , yoga_class_id: yoga_class.id)
       puts "You've already booked this yoga session!"
     else
-      puts "\n\n\nYour Reservation is Complete!\n\nWe can't wait to get down with you, Yogi!\n\n\n"
+      puts "
+      \n
+      \n
+      ╦ ╦╔═╗╔═╗╦ ╦╔═╗╔═╗┬
+      ║║║║ ║║ ║╠═╣║ ║║ ║│
+      ╚╩╝╚═╝╚═╝╩ ╩╚═╝╚═╝o
+      \n
+      \n"
+      puts "Your Reservation is Complete.\nWe can't wait to get down with you, Yogi!\n\n"
     returnReservationValue = Reservation.create(student_id: self.student.id , yoga_class_id: yoga_class.id)
     end
     sleep 2

@@ -31,7 +31,16 @@ class Student < ActiveRecord::Base
   #   end
 
   def self.register
-    studentInfo = TTY::Prompt.new.ask("Create a new username:")
+    system "clear"
+      puts "
+      \n
+      \n
+      ╦═╗╔═╗╔═╗╦╔═╗╔╦╗╔═╗╦═╗
+      ╠╦╝║╣ ║ ╦║╚═╗ ║ ║╣ ╠╦╝
+      ╩╚═╚═╝╚═╝╩╚═╝ ╩ ╚═╝╩╚═                                                   
+      \n
+      \n"
+    studentInfo = TTY::Prompt.new.ask("Create a new Username:")
     levelInfo =  TTY::Prompt.new.ask("What is your yoga level?\n(Beginner - Intermediate - Advanced)")
     
     if Student.find_by(name: studentInfo)
