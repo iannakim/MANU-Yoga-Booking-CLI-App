@@ -126,7 +126,7 @@ class Interface
     system "clear"
     res_id = res_id_str.to_i
     yoga_locations = YogaClass.all.map(&:location).uniq
-    choices = @prompt.select("Please Select the location of Your *New* Class:", yoga_locations) 
+    choices = @prompt.select("Please Select the location of Your * New * Class:", yoga_locations) 
     new_location_selected(choices, res_id)
     prompt.select("") do |menu|
       menu.choice "Cancel, go back to menu", -> {main_menu}
@@ -137,7 +137,7 @@ class Interface
 
   def new_location_selected(the_new_location, res_id)
     all_the_yoga = YogaClass.all.select {|yoga| yoga.location == the_new_location}
-      prompt.select("Choose Your *New* Class:") do |menu|
+      prompt.select("Choose Your * New * Class:") do |menu|
         all_the_yoga.each do |yoga_class|
           menu.choice yoga_class.name + " -- " + yoga_class.time + " -- " + yoga_class.instructor.name, -> {confirm_new_booking(yoga_class, res_id)}
         end
@@ -171,7 +171,7 @@ class Interface
     choices = @prompt.select("Select the class you would like to CANCEL:", all_my_reservations)
     res_id = (choices.split("-")[0]).to_i
     system "clear"
-    prompt.select ("Are you sure you want to CANCEL this class?") do |menu|
+    prompt.select ("Are you sure you want to * CANCEL * this class?") do |menu|
       menu.choice "Yes!", -> {delete_confirmed(res_id)}
       menu.choice "Nope, back to Menu", -> {self.main_menu}
     end
