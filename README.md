@@ -1,54 +1,60 @@
-## Process
+# Project: mānu
+> mānu is a CLI app that allows users to search for and book yoga classes at any one of the four yoga studios in new york city. mānu app has basic CRUD functionalities built in which allows users to:
 
-### NOTE
-- this setup contains a rakefile with helpful process reminders
-
-<!-- ### Setup
-1. Create Gemfile + run `bundle`
-2. Create migrations: run `rake db:create_migration` and add the syntax you need (e.g. `NAME=create_users`)
-3. Migrate: run `rake db:migrate` -->
-<!-- * **REMEMBER** never ever ever change anything in schema.
-4. Go to `.bin/run.rb` and change the name of the app on line 3 AND/OR go to `Rakefile` and change the name of the app on line 15 -->
-<!-- 5. Go to `./app/models` and change the names of the files (e.g. `User.rb` <- singular) and the class names inside -->
-<!-- 
-6. Set up association macros in classes (`belongs_to` / `has_many` / `has_many, through:`) -->
-7. Create seed file in `db/seed.rb` + then run `rake db:seed`
-* remember: seeding does not give you any output so no news on your console == good news
+* sign up/log in using a username
+* book a yoga session at a chosen location (create)
+* view all upcoming classes (read)
+* change reservations (update)
+* delete reservations (delete)
 
 
-8. Check if you've seeded correctly: run `rake c` and check what's the last instance of any of your class 
+## Table of contents
+* [General info](#general-info)
+* [Screenshots](#screenshots)
+* [Technologies](#technologies)
+* [Setup](#setup)
+* [Features](#features)
+* [Status](#status)
+* [Inspiration](#inspiration)
+* [Contact](#contact)
 
+## General info
+Add more general information about project. What the purpose of the project is? Motivation?
+During the ideation phase, my project collaborator and I realized that we both enjoyed yoga during our free time and agreed that we would build an app that would encourage people to try yoga or continue their practice during this extraordinary times.
 
-<!-- 9. Go to `./app/yourAppName.rb` and change that file's name and whatever is inside (the class name should correspond to what you wrote in `.bin/run.rb` on line 3) -->
+## Screenshots
+![Example screenshot](./img/screenshot.png)
 
-### Coding
-1. Create a dummy version of your logic -> hardcode it and don't yet make your code save anything to the database, just make sure that the logic works
-2. Test often by running the file or by `binding.pry`
-3. What I fould useful is drowing out every step I want to guide users through before coding - my whiteboard looked like this:
-![](Sunday.jpg)
-4. Then I coded the dummy version (without saving to the database, just to see if all "if"s are working and all that jazz)
-5. Then I added the database manipulations.
-6. Then I beautified the code and the app to make it visually pleasing
+## Technologies
+* Tech 1 - version 1.0
+* Tech 2 - version 2.0
+* Tech 3 - version 3.0
 
-## APIs
+## Setup
+Describe how to install / setup your local environement / add link to demo version.
 
-- [Dad Jokes API Docs](https://icanhazdadjoke.com/api)
-- [Sample API Request](https://icanhazdadjoke.com/api#fetch-a-random-dad-joke)
+## Code Examples
+Show examples of usage:
+`put-your-code-here`
 
-- [More APIs](https://rapidapi.com/collection/cool-apis)
-- [And even more APIs](https://medium.com/@vicbergquist/18-fun-apis-for-your-next-project-8008841c7be9)
+## Features
+List of features ready and TODOs for future development
+* Interactive Graphics and transition music for main menu
+* Personal Account Page to add/edit info
+* APIs of other available yoga studios near by
 
-## Fun Gems For Your Projects
-- `faker` - randomly generated seed data fun
-- `colorize` - colored text output in your terminal
-- `lolcat` - enabling rainbow text coloring
-- `rest-client` - make HTTP requests and get data from APIs
-- `tty-prompt` - nice interface for prompting for user input
-- `formatador` - styling output information into a neat table
-- `artii` - creating text banners
+To-do list:
+* Add a snippet of information about each location and the instructors that teaches there
+* Create an interface yoga studio's end to see how many students booked which classes
+* Create 'My Account' for users with edit profile functions
+* Add filter-by option to narrow down yoga class list
 
-## Tutorials
-- [Adding animations to your CLI by Sylwia Vargas](https://medium.com/better-programming/add-an-animation-or-a-giph-to-your-ruby-cli-29952e8c46ea)
-- [Adding ASCII Art to your CLI by Sylwia Vargas](https://medium.com/@sylwiavargas/adding-pictures-to-your-ruby-cli-4252b89823a)
-- [Using Time/Date in your CLI by Joel Mendoza](https://medium.com/@joelmendza173/ruby-date-time-for-dummies-9f45518bab64)
+## Status
+Project is: _in progress_
+
+## Inspiration
+This project was inspired by my original collaborator Hortencia Cisneros and my love of yoga. Despite the extraordinary times that we are living in since covid19, people of new york have continued to pursue wellness of their mind and body and I hope that will never change.
+
+## Contact
+Created by [@anna](https://www.linkedin.com/in/problemsolveranna/) - feel free to contact me!
 
