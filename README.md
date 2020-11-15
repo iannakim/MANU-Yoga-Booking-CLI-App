@@ -1,60 +1,37 @@
-# Project: mānu
-> mānu is a CLI app that allows users to search for and book yoga classes at any one of the four yoga studios in new york city. mānu app has basic CRUD functionalities built in which allows users to:
-
-* sign up/log in using a username
-* book a yoga session at a chosen location (create)
-* view all upcoming classes (read)
-* change reservations (update)
-* delete reservations (delete)
-
-
-## Table of contents
-* [General info](#general-info)
-* [Screenshots](#screenshots)
-* [Technologies](#technologies)
-* [Setup](#setup)
-* [Features](#features)
-* [Status](#status)
-* [Inspiration](#inspiration)
-* [Contact](#contact)
-
-## General info
-Add more general information about project. What the purpose of the project is? Motivation?
-During the ideation phase, my project collaborator and I realized that we both enjoyed yoga during our free time and agreed that we would build an app that would encourage people to try yoga or continue their practice during this extraordinary times.
-
-## Screenshots
-![Example screenshot](./img/screenshot.png)
-
-## Technologies
-* Tech 1 - version 1.0
-* Tech 2 - version 2.0
-* Tech 3 - version 3.0
-
-## Setup
-Describe how to install / setup your local environement / add link to demo version.
-
-## Code Examples
-Show examples of usage:
-`put-your-code-here`
+# Mānu
+> mānu is a Ruby CLI application for booking yoga classes in one of the many yoga studios around New York City. 
 
 ## Features
-List of features ready and TODOs for future development
-* Interactive Graphics and transition music for main menu
-* Personal Account Page to add/edit info
-* APIs of other available yoga studios near by
+* Sign up/log in using a username and password [includs validations on username and pw]
+* Book a yoga session at a chosen location (Create)
+* View all upcoming classes (Read)
+* Change reservations (Update)
+* Delete reservations (Delete) [Confirmation included]
 
-To-do list:
-* Add a snippet of information about each location and the instructors that teaches there
-* Create an interface yoga studio's end to see how many students booked which classes
-* Create 'My Account' for users with edit profile functions
-* Add filter-by option to narrow down yoga class list
+
+## Set Up
+1. Clone this repo to your local computer [-git clone <git repository>]
+2. CD into the MANU-Yoga-Booking-CLI-App repo
+3. Run 'bundle install' to install all required dependencies
+4. Run 'rake db:migrate' to create tables into the databse
+5. Run 'rake db:seed' to create seed data
+6. Run 'rake start' to run the app!
+
+## Technologies
+* Ruby [2.6.1]
+* SQLite3 [~> 1.4] - Database
+* TTY::Prompt - Gem that provides easy option selection
+* Rake - Task manager
+
+## Screenshots
+* coming soon!
 
 ## Status
-Project is: _in progress_
+This project is completed.
 
-## Inspiration
-This project was inspired by my original collaborator Hortencia Cisneros and my love of yoga. Despite the extraordinary times that we are living in since covid19, people of new york have continued to pursue wellness of their mind and body and I hope that will never change.
+## Inspiration Behind Mānu
+This project was inspired by my cohort, Hortencia Cisneros and my love of yoga and mindful movements that brings happiness to people. Despite the extraordinary times that we are living in currently because of Covid-19, New Yorkers have continued to pursue wellness of their mind and body and we hope that will never change.
 
 ## Contact
-Created by [@anna](https://www.linkedin.com/in/problemsolveranna/) - feel free to contact me!
+Created by [Anna Kim](https://www.linkedin.com/in/problemsolveranna/)
 
