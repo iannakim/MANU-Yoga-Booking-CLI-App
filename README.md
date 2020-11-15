@@ -1,5 +1,5 @@
 # Mānu
-> mānu is a Ruby CLI application for booking yoga classes in one of the many yoga studios around New York City. 
+Mānu is a Ruby CLI application for booking yoga classes in one of the many yoga studios around New York City. 
 
 ## Features
 * Sign up/log in using a username and password [includs validations on username and pw]
