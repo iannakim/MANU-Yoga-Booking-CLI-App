@@ -17,7 +17,7 @@
 5. Run 'rake db:seed' to create seed data
 6. Run 'rake start' to run the app!
 
-## Technologies
+## Tech Stack
 * Ruby [2.6.1]
 * SQLite3 [~> 1.4] - Database
 * TTY::Prompt - Gem that provides easy option selection
