@@ -24,7 +24,7 @@ Mānu is a Ruby CLI application for booking yoga classes in one of the many yoga
 * Rake - Task manager
 
 ## Screenshots
-* <img src='./Screenshots.png'> </img>
+<img src='./Screenshots.png'> </img>
 
 ## Status
 This project is completed.
