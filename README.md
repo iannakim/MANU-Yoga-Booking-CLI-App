@@ -24,7 +24,7 @@ Mānu is a Ruby CLI application for booking yoga classes in one of the many yoga
 * Rake - Task manager
 
 ## Screenshots
-* coming soon!
+* <img src='./Screenshots.png'> </img>
 
 ## Status
 This project is completed.
@@ -32,6 +32,6 @@ This project is completed.
 ## Inspiration Behind Mānu
 This project was inspired by my cohort, Hortencia Cisneros and my love of yoga and mindful movements that brings happiness to people. Despite the extraordinary times that we are living in currently because of Covid-19, New Yorkers have continued to pursue wellness of their mind and body and we hope that will never change.
 
-## Contact
-Created by [Anna Kim](https://www.linkedin.com/in/problemsolveranna/)
+## Created by
+* [Anna Kim](https://www.linkedin.com/in/problemsolveranna/) - Let's Connect! 👋🏻
 
