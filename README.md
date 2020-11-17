@@ -1,13 +1,15 @@
 # Mānu
 Mānu is a Ruby CLI application for booking yoga classes in one of the many yoga studios around New York City. 
 
+## Take a Look 📷
+<img src='./Screenshots.png'> </img>
+
 ## Features
 * Sign up/log in using a username and password [includs validations on username and pw]
 * Book a yoga session at a chosen location (Create)
 * View all upcoming classes (Read)
 * Change reservations (Update)
 * Delete reservations (Delete) [Confirmation included]
-
 
 ## Set Up
 1. Clone this repo to your local computer [-git clone <git repository>]
@@ -22,9 +24,6 @@ Mānu is a Ruby CLI application for booking yoga classes in one of the many yoga
 * SQLite3 [~> 1.4] - Database
 * TTY::Prompt - Gem that provides easy option selection
 * Rake - Task manager
-
-## Screenshots
-<img src='./Screenshots.png'> </img>
 
 ## Status
 This project is completed.
