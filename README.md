@@ -26,7 +26,7 @@ Mānu is a Ruby CLI application for booking yoga classes in one of the many yoga
 <img src='./Screenshots.png'> </img>
 
 ## Build Status
-This project is completed.
+This project was completed in 5 days for the purpose of the project presentation.
 
 ## Created by
 * [Anna Kim](https://www.linkedin.com/in/problemsolveranna/) - Let's Connect! 👋🏻
